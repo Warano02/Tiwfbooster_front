@@ -1,5 +1,6 @@
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/Signup";
+import ForgotPassword from "../pages/auth/ForgotPassword";
 import Auth from "../Layout/Auth";
 
 export const authRoutes = {
@@ -13,6 +14,10 @@ export const authRoutes = {
         {
             path: "signup",
             element: <SignUp />,
+        },
+        {
+            path: "forgot-password",
+            element: <ForgotPassword />,
         },
     ],
 };

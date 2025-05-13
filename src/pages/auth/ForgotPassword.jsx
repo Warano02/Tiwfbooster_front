@@ -2,6 +2,7 @@
 function ForgotPassword() {
   return (
     <div>
+      
        ForgotPassword COMPONENT enter email and get OTP
     </div>
   )
