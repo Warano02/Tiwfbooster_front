@@ -12,7 +12,7 @@ function Auth() {
     // }
     return (
         <>
-            <div className="w-full h-full bg-gray-100">
+            <div className="w-full h-full">
                 <Outlet />
             </div>
         </>
