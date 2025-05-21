@@ -41,7 +41,6 @@ const OTP = () => {
     const code = digits.join('');
     console.log('Code:', code);
     console.log('Trust this device:', trustDevice);
-    // Ajoutez votre logique ici (envoi au backend, etc.)
   };
   return (
     <>
