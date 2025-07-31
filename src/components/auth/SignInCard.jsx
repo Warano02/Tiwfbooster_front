@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
 import { GoogleIcon, SitemarkIcon } from './CustomIcons';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
@@ -32,13 +34,38 @@ const Card = styled(MuiCard)(({ theme }) => ({
     }),
 }));
 
+
+
+
 export default function SignInCard() {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
     const [open, setOpen] = React.useState(false);
-
+    const loginWithGoogle = useGoogleLogin({
+        flow: 'auth-code',
+        onSuccess: async ({ code ,...d}) => {
+            try {
+                sessionStorage.setItem('googleAuthCode', JSON.stringify(d));
+                // Envoie le code au backend
+                console.log(code);
+                
+                // const res = await axios.post('http://localhost:3000/api/auth/google', {
+                //     code,
+                // });
+                // console.log(res?.data)
+                // Traitement après enregistrement (token, redirection...)
+                alert('Authentifié avec succès');
+            } catch (err) {
+                console.error(err);
+                alert('Erreur lors de l’authentification');
+            }
+        },
+        scope: 'https://www.googleapis.com/auth/contacts https://www.googleapis.com/auth/userinfo.email',
+        access_type: 'offline',
+        prompt: 'consent',
+    });
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -175,12 +202,12 @@ export default function SignInCard() {
                 <Button
                     fullWidth
                     variant="outlined"
-                    onClick={() => alert('Sign in with Google')}
+                    onClick={() => loginWithGoogle()}
                     startIcon={<GoogleIcon />}
                 >
                     Sign in with Google
                 </Button>
-        
+
             </Box>
         </Card>
     );
