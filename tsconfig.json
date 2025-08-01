@@ -2,12 +2,17 @@
   "compilerOptions": {
     "target": "ES6",
     "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx", 
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   }
 }
