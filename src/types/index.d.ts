@@ -15,3 +15,8 @@ export interface ThemeContextType {
   theme: "light" | "dark";
   toggleTheme: () => void;
 }
+export interface LoginFormData {
+  email: string;
+  password: string;
+  remember: boolean;
+}
