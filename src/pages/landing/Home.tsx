@@ -15,15 +15,11 @@ function App() {
       return;
     }
 
-    try {
       const { data } = await axios.get(
         `${API_URL}/google/auth-url?phone=${whatsappNumber}`
       );
       window.location.href = data?.url;
-    } catch (e) {
-      console.error(e);
-      alert("Error while requesting auth URL");
-    }
+   
   };
 
   useEffect(() => {

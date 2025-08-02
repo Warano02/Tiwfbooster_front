@@ -1,13 +1,14 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
-import { Loader } from '../../assets/svg';
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Loader } from "../../assets/svg";
+import axios, { AxiosError } from "axios";
 
 type Props = {
   onSubmit?: (whatsappNumber: string) => Promise<void> | void;
 };
 
 function RequestAuthPage({ onSubmit }: Props) {
-  const [whatsappNumber, setWhatsappNumber] = useState('');
-  const [error, setError] = useState('');
+  const [whatsappNumber, setWhatsappNumber] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -15,15 +16,19 @@ function RequestAuthPage({ onSubmit }: Props) {
 
     const trimmed = whatsappNumber.trim();
 
-    if (!/^(\+?\d{7,15})$/.test(trimmed)) {
-      setError("Veuillez entrer un numéro valide.");
+    if (!/^\+?\d{7,15}$/.test(trimmed)) {
+      setError("Veuillez entrer un numéro WhatsApp valide.");
       return;
     }
 
-    setError('');
+    setError(null);
     setLoading(true);
+
     try {
       await onSubmit?.(trimmed);
+    } catch (e: unknown) {
+      const err = e as AxiosError<{ msg: string }>;
+      setError(err?.response?.data?.msg || "Une erreur est survenue.");
     } finally {
       setLoading(false);
     }
@@ -44,6 +49,7 @@ function RequestAuthPage({ onSubmit }: Props) {
         <input
           type="tel"
           required
+          autoFocus
           placeholder="+237 621 09 21 30"
           value={whatsappNumber}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -55,8 +61,8 @@ function RequestAuthPage({ onSubmit }: Props) {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2 ${
-            loading ? 'opacity-60 cursor-not-allowed' : ''
+          className={`w-full cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2 ${
+            loading ? "opacity-60 cursor-not-allowed" : ""
           }`}
         >
           {loading ? (
@@ -65,7 +71,7 @@ function RequestAuthPage({ onSubmit }: Props) {
               <span>Envoi en cours...</span>
             </>
           ) : (
-            'Allow now'
+            "Allow now"
           )}
         </button>
       </form>
