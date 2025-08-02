@@ -1,15 +1,35 @@
-import { useState } from 'react';
-import RequestAuthPage from '../../components/contacts/RequestAuthPage';
-import TokenSuccess from '../../components/contacts/TokenSuccess';
+import { useState, useEffect } from "react";
+import RequestAuthPage from "../../components/contacts/RequestAuthPage";
+import TokenSuccess from "../../components/contacts/TokenSuccess";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const [token, setToken] = useState<string | null>(null);
+  const location = useLocation();
 
+  const API_URL = import.meta.env.VITE_API_URL;
   const handlePhoneSubmit = async (whatsappNumber: string) => {
-    console.log('Numéro envoyé:', whatsappNumber);
-    const fakeToken = 'ya29.a0AfH6SMBb3F0-fake-token-example';
-    setToken(fakeToken);
+    if (!API_URL) {
+      alert("API_URL is not defined in your .env file");
+      return;
+    }
+
+    try {
+      const { data } = await axios.get(
+        `${API_URL}/google/auth-url?phone=${whatsappNumber}`
+      );
+      window.location.href = data?.url;
+    } catch (e) {
+      console.error(e);
+      alert("Error while requesting auth URL");
+    }
   };
+
+  useEffect(() => {
+    const sessionToken = new URLSearchParams(location.search).get("session");
+    if (sessionToken) setToken(sessionToken);
+  }, [location.search]);
 
   return token ? (
     <TokenSuccess token={token} />
