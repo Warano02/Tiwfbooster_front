@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ChatSidebar } from "@/components/chat/chat-sidebar";
 import { ChatMain } from "@/components/chat/chat-main";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -9,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { MenuIcon, Github } from "lucide-react";
 import Link from "next/link";
+import { Sidebar } from "@/components/Sidebar";
 
 export default function ChatPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function ChatPage() {
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       <div className="hidden md:block w-64 border-r border-border">
-        <ChatSidebar />
+        <Sidebar />
       </div>
 
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
@@ -24,7 +24,7 @@ export default function ChatPage() {
           side="left"
           className="w-64 p-0 border-none [&>button]:hidden"
         >
-          <ChatSidebar />
+          <Sidebar />
         </SheetContent>
       </Sheet>
 
