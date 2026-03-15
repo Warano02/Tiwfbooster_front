@@ -59,7 +59,7 @@ function ConnectQr({ setMode }: { setMode: (m: Mode) => void }) {
                     </a>
                     <div className="border-t border-[#e9edef] dark:border-[#2a3942] pt-5 flex items-center justify-between">
 
-                        <button onClick={() => setMode("phone")} className="text-sm text-[#667781] dark:text-[#8696a0] hover:text-[#25d366] transition-colors flex items-center gap-1">
+                        <button onClick={() => setMode("phone")} className="text-sm text-[#667781] dark:text-[#8696a0] hover:text-[#25d366] transition-colors flex items-center gap-1 cursor-pointer">
                             Log in with phone number <span>›</span>
                         </button>
                     </div>
