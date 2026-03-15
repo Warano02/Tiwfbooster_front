@@ -178,7 +178,7 @@ function ConnectPhoneNumber({ setMode }: { setMode: (mode: Mode) => void }) {
   const placeholder = country.fmt.replace(/#/g, "0");
   if (sent) return <CodeSend phoneNumber="+237689895250" code="XMLOPLKM" setMode={setMode} resetNumber={resetNumber} />
   return (
-    <main className=" bg-[#f0f2f5] dark:bg-[#111b21] flex items-center justify-center ">
+    <main className=" bg-[#f0f2f5] dark:bg-[#111b21] flex items-center justify-center h-full">
       <div className="bg-white dark:bg-[#202c33] rounded-2xl border border-[#e9edef] dark:border-[#2a3942] w-full max-w-md p-10 flex flex-col items-center gap-6">
 
         <div className="text-center">

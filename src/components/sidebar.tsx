@@ -16,6 +16,7 @@ import {
   ChevronDown,
   Plus,
   LogOut,
+  Smartphone,
 } from "lucide-react";
 import {
   Sidebar,
@@ -35,17 +36,14 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { title: "Templates", icon: LayoutGrid, },
-  { title: "Notification", icon: Bell, },
   { title: "Dashboard", icon: LayoutDashboard, isActive: true, },
-  { title: "Inbox", icon: Inbox, },
-  { title: "Project", icon: FolderKanban, },
-  { title: "Calendar", icon: Calendar, },
+  { title: "Connect", icon: Smartphone, },
+  { title: "Notification", icon: Bell, },
+
   { title: "Reports", icon: BarChart3, },
   { title: "Help & Center", icon: HelpCircle, },
   { title: "Settings", icon: Settings, },
