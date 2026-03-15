@@ -1,8 +1,9 @@
+import React from 'react'
 
-function Devices() {
-    return (
-        <div>Devices</div>
-    )
+function page() {
+  return (
+    <div>page</div>
+  )
 }
 
-export default Devices
+export default page

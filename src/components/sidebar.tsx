@@ -38,20 +38,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const navItems = [
-  { title: "Dashboard", icon: LayoutDashboard, isActive: true, },
-  { title: "Connect", icon: Smartphone, },
-  { title: "Notification", icon: Bell, },
-
-  { title: "Reports", icon: BarChart3, },
-  { title: "Help & Center", icon: HelpCircle, },
-  { title: "Settings", icon: Settings, },
+  { title: "Dashboard", icon: LayoutDashboard, href: "/", },
+  { title: "Connect", icon: Smartphone, href: "/connect" },
+  { title: "Notification", icon: Bell, href: "#" },
+  { title: "Reports", icon: BarChart3, href: "#" },
+  { title: "Help & Center", icon: HelpCircle, href: '/help' },
+  { title: "Settings", icon: Settings, href: '#' },
 ];
 
 export function DashboardSidebar(
   props: React.ComponentProps<typeof Sidebar>
 ) {
+  const pathname = usePathname()
   return (
     <Sidebar collapsible="offcanvas" className="border-r-0!" {...props}>
       <SidebarHeader className="px-3 py-4">
@@ -87,16 +88,17 @@ export function DashboardSidebar(
         <SidebarGroup className="p-0">
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={item.isActive} className="h-9">
-                    <Link href="#">
+              {navItems.map((item) => {
+                const isActive = pathname == item.href
+                return <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={isActive} className="h-9">
+                    <Link href={item.href} >
                       <item.icon className={cn("size-4 shrink-0",)} />
                       <span className="text-sm">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
