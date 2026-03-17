@@ -40,12 +40,7 @@ export function ChatInput({ message, onMessageChange, onSend }: ChatInputProps) 
                 <Button variant="ghost" size="icon" className="size-8 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted">
                     <PaperclipIcon className="size-4" />
                 </Button>
-                <Button
-                    size="icon"
-                    disabled={!canSend}
-                    onClick={handleSend}
-                    className="size-8 rounded-full disabled:opacity-30 transition-opacity"
-                >
+                <Button size="icon" disabled={!canSend}  onClick={handleSend} className="size-8 rounded-full disabled:opacity-30 transition-opacity">
                     <ArrowUpIcon className="size-4" />
                 </Button>
             </div>
