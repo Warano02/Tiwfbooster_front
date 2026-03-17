@@ -101,12 +101,12 @@ const SingleDevice = ({ id, date, name }: TDevice) => {
                 {new Date(date).toLocaleDateString()}
             </td>
             <td className="px-4 py-3 flex gap-2">
-                <Link href={`/devices/${id}`} className="p-2 text-white rounded-md transition cursor-pointer">
+                <Link href={`/devices/${id}`} className="p-2 dark:text-white rounded-md transition cursor-pointer">
                     <Eye size={16} />
                 </Link>
                 <Dialog>
                     <DialogTrigger asChild>
-                        <button className="px-3 py-1  text-white cursor-pointer">
+                        <button className="px-3 py-1  dark:text-white cursor-pointer">
                             <Pen size={18} />
                         </button>
                     </DialogTrigger>
